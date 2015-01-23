@@ -3,43 +3,43 @@
 	{
 		"id":"494451397",
 		"title":"Contacts--",
-		"detail":"Back up, clean and merge your contacts.",
+		"detail":"Back up, remove duplication and merge your contacts.",
 		"iconurl":"http://a1.mzstatic.com/us/r30/Purple5/v4/9c/40/50/9c405067-d0fc-29b1-afc2-281eedfc2c4b/icon100x100.png"
 	},
 	{
 		"id":"476039389",
 		"title":"Map Measure",
-		"detail":"Measure distance and area on map.",
+		"detail":"Measure length of a custom path and area of a polygon on map.",
 		"iconurl":"http://a4.mzstatic.com/us/r30/Purple3/v4/f5/de/0d/f5de0dc5-1eed-d5bf-b7f9-9b5e24951461/icon100x100.png"
 	},
 	{
 		"id":"498712802",
 		"title":"AddressBook++",
-		"detail":"Group manager and send group text or email.",
+		"detail":"Manager address book group and send group text or email.",
 		"iconurl":"icon100x100.png"
 	},
 	{
 		"id":"956717478",
 		"title":"Delete photos quickly",
-		"detail":"Quickly view and delete useless photos.",
+		"detail":"Quickly view and delete useless photos or screenshot.",
 		"iconurl":"http://a5.mzstatic.com/us/r30/Purple5/v4/30/12/ad/3012adf4-460d-f61e-0755-6144dbeee557/icon100x100.png"
 	},
 	{
 		"id":"832564884",
 		"title":"Quick record time",
-		"detail":"Record time by take a screenshot.",
+		"detail":"Quickly record time by take a screenshot without open this app.",
 		"iconurl":"http://a4.mzstatic.com/us/r30/Purple/v4/e3/40/eb/e340ebcf-ad99-e462-67c0-f5a5cd819fb6/icon100x100.png"
 	},
 	{
 		"id":"938037644",
 		"title":"Fog of World Assistant",
-		"detail":"Create and import data to Fog of World.",
+		"detail":"Create and import data to the great app #Fog of World#.",
 		"iconurl":"http://a1.mzstatic.com/us/r30/Purple1/v4/ea/fa/55/eafa5501-982b-2980-1ca1-64ca919452ec/icon100x100.png"
 	},
 	{
 		"id":"440703742",
 		"title":"Hand Shadow",
-		"detail":"More than 100 hand shadow guide.",
+		"detail":"Show you more than 100 hand shadow. Play it with your kids",
 		"iconurl":"http://a2.mzstatic.com/us/r30/Purple/v4/a8/aa/dc/a8aadce4-a37a-9a91-5d29-cab4b1d37861/icon100x100.png"
 	}
 	]
