@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		地图尺-测量地球上任意位置</title>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script>
+
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchControl/1.4/src/SearchControl_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchControl/1.4/src/SearchControl_min.css" />
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XIKjqrIab5m4ABOLqHhmZHEB"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<!--web-font-->
+<link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<!--//web-font-->
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Showy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="http://ajax.useso.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- //Custom Theme files -->
+<!-- js -->
+<script src="js/jquery.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<!-- //js -->	
+<!-- start-smoth-scrolling-->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>	
+<script type="text/javascript" src="js/modernizr.custom.53451.js"></script>
+<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+</script>
+<!--//end-smoth-scrolling-->
+</head>
+<body>
+	<!--header-->
+	<div class="header">
+		<div class="container">
+			<div class="header-logo">
+				<h1><a href="index.html">地图尺</a></h1>
+			</div>
+			<div class="top-nav">
+
+				<ul class="nav1">
+					<li><a href="index.html" class="active">国内Web版</a></li>
+					<li><a href="app.html">下载客户端</a></li>
+					<li><a href="http://www.baidu.com/">国际Web版</a></li>
+					<li><wb:follow-button uid="2003438215" type="red_1" width="67" height="24" ></wb:follow-button></li>
+				</ul>
+				<!-- script-for-menu -->
+				 <script>
+				   $( "span.menu" ).click(function() {
+					 $( "ul.nav1" ).slideToggle( 300, function() {
+					 // Animation complete.
+					  });
+					 });
+				</script>
+				<!-- /script-for-menu -->
+			</div>	
+			<div class="clearfix"> </div>
+		</div>	
+	</div>
+	<!--//header-->
+	<!--bottom-nav-->
+
+	<div id="searchBox" style="left:0px;right: 0px;background-color: blue"></div>
+
+	<div id="container" style="position: absolute;left:8px;right:8px;top:140px;bottom: 0px;">
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+	var map = new BMap.Map("container");
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
+	map.enableInertialDragging();
+
+	//普通图，卫星图
+	var mapType1 = new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]});
+	map.addControl(mapType1);
+	// 添加带有定位的导航控件
+	var navigationControl = new BMap.NavigationControl({
+		// 靠左上角位置
+		anchor: BMAP_ANCHOR_TOP_LEFT,
+		// LARGE类型
+		type: BMAP_NAVIGATION_CONTROL_LARGE,
+		// 启用显示定位
+		enableGeolocation: true
+	});
+	map.addControl(navigationControl);
+	//比例尺
+	var blc = new BMap.ScaleControl({anchor:BMAP_ANCHOR_TOP_LEFT});
+	map.addControl(blc)
+	// 添加定位控件
+	var geolocationControl = new BMap.GeolocationControl();
+	map.addControl(geolocationControl);
+	//测距功能
+	var myDis = new BMapLib.DistanceTool(map);
+	//搜索功能
+	var searchControl = new BMapLib.SearchControl({
+		container:"searchBox",map:map,type:LOCAL_SEARCH
+	})
+
+	// 定义一个控件类,即function
+	function MeasureControl(title,func,dy){
+		// 默认停靠位置和偏移量
+		this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+		this.defaultOffset = new BMap.Size(10, dy);
+		this.measureTitle = title;
+		this.measureFunc = func;
+	}
+
+	// 通过JavaScript的prototype属性继承于BMap.Control
+	MeasureControl.prototype = new BMap.Control();
+
+	// 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+	// 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
+	MeasureControl.prototype.initialize = function(map){
+		// 创建一个DOM元素
+		var div = document.createElement("div");
+		// 添加文字说明
+		div.appendChild(document.createTextNode(this.measureTitle.toString()));
+		// 设置样式
+		div.style.cursor = "pointer";
+		div.style.border = "1px solid blue";
+		div.style.backgroundColor = "white";
+		div.style.textAlign = "center";
+		// 绑定事件,点击一次放大两级
+		div.onclick = this.measureFunc;
+
+		// 添加DOM元素到地图中
+		map.getContainer().appendChild(div);
+		// 将DOM元素返回
+		return div;
+	}
+	// 创建控件
+	var line = new MeasureControl("测 距",function(e){myDis.open();},300);
+	// 添加到地图当中
+	map.addControl(line);
+	var line = new MeasureControl("测面积",function(e){startMeasureArea();},330);
+	// 添加到地图当中
+	map.addControl(line);
+	var line = new MeasureControl("清 空",function(e){removeAllArea();},360);
+	// 添加到地图当中
+	map.addControl(line);
+
+	var isMeasureArea = false;
+	var points = [];
+	var polygon;
+	var arealabelMarker;
+	var arealabel;
+
+	function startMeasureArea(){
+		isMeasureArea = true;
+		points = [];
+		myDis.open();
+		document.getElementById("msg").innerHTML="Start";
+	};
+
+	//删除所有面积的overlay
+	function removeAllArea(){
+		map.clearOverlays();
+		points = []
+	}
+
+
+	myDis.addEventListener("drawend", function(e) {
+		console.log("drawend");
+		console.log(e.points);
+		console.log(e.overlays);
+		console.log(e.distance);
+		isMeasureArea = false;
+	});
+
+	myDis.addEventListener("addpoint", function(e) {
+		console.log("addpoint");
+		console.log(e.point);
+		console.log(e.pixel);
+		console.log(e.index);
+		console.log(e.distance);
+		console.log(isMeasureArea);
+		if (isMeasureArea) {
+			points.push(e.point);
+			if (points.length > 3) {
+				map.removeOverlay(polygon);
+				map.removeOverlay(arealabelMarker);
+			}
+			if (points.length > 2) {
+				polygon = new BMap.Polygon(points, {strokeColor: "blue", storkeWeight: 0.5, strokeOperacity: 0.1,fillColor:"yellow",fillOperacity:0.5});
+				map.addOverlay(polygon);
+				//计算面积和移动位置
+				var area = BMapLib.GeoUtils.getPolygonArea(polygon);
+				console.log(area);
+				var xsum = 0, ysum = 0;
+				for (var i = 0; i < points.length; i++) {
+					var pt = points[i];
+					xsum += pt.lng;
+					ysum += pt.lat;
+				}
+				console.log(xsum, ysum);
+				arealabelMarker = new BMap.Marker(new BMap.Point(xsum / points.length, ysum / points.length));
+				map.addOverlay(arealabelMarker);
+				var text = "共" + area.toFixed(2) + "平方米";
+				if (area < 0) {
+					text = "非多边形,无法计算面积";
+				}
+				arealabel = new BMap.Label(text, {offset: new BMap.Size(20, -10)});
+				arealabelMarker.setLabel(arealabel);
+			}
+		}
+	});
+
+	myDis.addEventListener("removepolyline", function(e) {
+		console.log("removepolyline");
+		console.log(e);
+		map.removeOverlay(polygon);
+		map.removeOverlay(arealabelMarker);
+
+	});
+</script>
