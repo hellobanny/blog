@@ -44,9 +44,15 @@
 	}
 	{
 		"id":"1250815924",
-		"title":"Map Measure",
-		"detail":"Show you more than 100 hand shadow. Play it with your kids.",
-		"iconurl":"http://a2.mzstatic.com/us/r30/Purple/v4/61/71/80/61718000-5496-6173-1d60-57cf1d69ea3b/icon100x100.png"
+		"title":"距离与面积",
+		"detail":"用最清晰的高德卫星地图在地面上测距和测面积",
+		"iconurl":"http://is3.mzstatic.com/image/thumb/Purple117/v4/a6/de/72/a6de725d-f3a5-1677-477c-7f7f7a2fa3a9/source/100x100.jpg"
+	}
+	{
+		"id":"1051212505",
+		"title":"欲望与成就",
+		"detail":"游戏化的个人习惯培养和待办事项管理",
+		"iconurl":"http://is5.mzstatic.com/image/thumb/Purple118/v4/ef/76/72/ef7672c7-b203-6fbb-b0d5-fa88d8a6e7b5/source/100x100.jpg"
 	}
 	]
 
