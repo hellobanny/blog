@@ -13,6 +13,12 @@
 		"iconurl":"http://a4.mzstatic.com/us/r30/Purple3/v4/f5/de/0d/f5de0dc5-1eed-d5bf-b7f9-9b5e24951461/icon100x100.png"
 	},
 	{
+		"id":"983873587",
+		"title":"Map Measure",
+		"detail":"Measure length of a custom path and area of a polygon on map.",
+		"iconurl":"http://a4.mzstatic.com/us/r30/Purple3/v4/f5/de/0d/f5de0dc5-1eed-d5bf-b7f9-9b5e24951461/icon100x100.png"
+	},
+	{
 		"id":"498712802",
 		"title":"AddressBook++",
 		"detail":"Manager address book group and send group text or email.",
